@@ -14,22 +14,18 @@ local Window = Fluent:CreateWindow({
 
 -- HOME
 local HomeTab = Window:AddTab({ Title = "Home", Icon = "home" })
-
 HomeTab:AddParagraph({
     Title = "📢 Aviso",
     Content = "Esse hub está em desenvolvimento. Algumas funções podem ser instáveis.\nFique atento às atualizações!"
 })
-
 HomeTab:AddParagraph({
     Title = "👑 Desenvolvedor",
     Content = "Criado por: @yanlioth"
 })
-
 HomeTab:AddParagraph({
     Title = "🌐 Redes Sociais",
-    Content = "Discord: yanlioth\nGitHub: https://github.com/yanlioth"
+    Content = "Discord: yanlioth\nGitHub: github.com/yanlioth"
 })
-
 HomeTab:AddButton({
     Title = "Copiar Discord",
     Description = "Copia seu user pro clipboard",
@@ -81,10 +77,15 @@ for name, url in pairs(gameScripts) do
     })
 end
 
--- CONFIGS E TEMA
+-- CONFIG E TEMA (fixado no final mesmo)
+local ConfigTab = Window:AddTab({ Title = "⚙ Configs", Icon = "settings" })
+
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 
+InterfaceManager:SetFolder("LiothXHub")
+SaveManager:SetFolder("LiothXHub")
+SaveManager:BuildConfigSection(ConfigTab)
+InterfaceManager:BuildInterfaceSection(ConfigTab)
+
 SaveManager:LoadAutoloadConfig()
-InterfaceManager:BuildInterfaceSection(Window)
-SaveManager:BuildConfigSection(Window)
