@@ -1,11 +1,14 @@
 repeat task.wait() until game:IsLoaded()
+task.wait(2)
 
+-- Carregar Rayfield
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
+-- Criar Janela Principal
 local Window = Rayfield:CreateWindow({
-    Name = "Lioth X Hub",
-    LoadingTitle = "Lioth X Hub",
-    LoadingSubtitle = "Carregando...",
+    Name = "Lioth X Hub 🖤",
+    LoadingTitle = "Carregando a Máfia...",
+    LoadingSubtitle = "Invadindo servidores Roblox 😈",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -19,21 +22,48 @@ local Window = Rayfield:CreateWindow({
     },
 })
 
-local MainTab = Window:CreateTab("Main", 4483362458)
-MainTab:CreateLabel("Bem-vindo ao Lioth X Hub")
-MainTab:CreateLabel("by @yanlioth")
+task.wait(1)
 
-local ScriptsTab = Window:CreateTab("Scripts", 4483345998)
+-- 🏠 HOME: Avisos, redes sociais, etc
+local HomeTab = Window:CreateTab("Home", 4483362458)
+HomeTab:CreateLabel("Bem-vindo ao Lioth X Hub")
+HomeTab:CreateLabel("Desenvolvido por @yanlioth")
+HomeTab:CreateParagraph({
+    Title = "🌐 Redes Sociais",
+    Content = "Discord: yanlioth\nYouTube: em breve...\nTwitter: @yanlioth"
+})
+HomeTab:CreateParagraph({
+    Title = "📢 Avisos",
+    Content = "Scripts em constante atualização.\nUse com responsabilidade! 😎"
+})
 
-ScriptsTab:CreateButton({
-    Name = "Infinite Yield (Admin Commands)",
+-- 💻 MAIN: Scripts universais
+local MainTab = Window:CreateTab("Main", 4483345998)
+MainTab:CreateLabel("Scripts Universais")
+
+MainTab:CreateSection("📜 Scripts Universais")
+
+MainTab:CreateButton({
+    Name = "Infinite Yield",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
     end,
 })
 
-ScriptsTab:CreateButton({
-    Name = "Dead Rails",
+MainTab:CreateButton({
+    Name = "Free Gamepass",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy", true))()
+    end,
+})
+
+-- 🎮 GAMES: Scripts de jogos específicos
+local GamesTab = Window:CreateTab("Games", 4483362458)
+
+GamesTab:CreateSection("🚂 Dead Rails")
+
+GamesTab:CreateButton({
+    Name = "Dead Rails Script",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/NebulaHubOfc/Public/refs/heads/main/Loader.lua"))()
     end,
