@@ -1,64 +1,90 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
 local Window = Fluent:CreateWindow({
-    Title = "Lioth X Hub | by @yanlioth",
-    SubTitle = "Universal Scripts",
+    Title = "Lioth X Hub",
+    SubTitle = "by @yanlioth",
     TabWidth = 160,
-    Size = UDim2.fromOffset(500, 400),
+    Size = UDim2.fromOffset(520, 400),
     Acrylic = true,
-    Theme = "Darker",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.RightControl
 })
 
-local Tabs = {
-    Home = Window:AddTab({ Title = "Home", Icon = "home" }),
-    Scripts = Window:AddTab({ Title = "Scripts", Icon = "scroll" })
+-- HOME
+local HomeTab = Window:AddTab({ Title = "Home", Icon = "home" })
+
+HomeTab:AddParagraph({
+    Title = "📢 Aviso",
+    Content = "Esse hub está em desenvolvimento. Algumas funções podem ser instáveis.\nFique atento às atualizações!"
+})
+
+HomeTab:AddParagraph({
+    Title = "👑 Desenvolvedor",
+    Content = "Criado por: @yanlioth"
+})
+
+HomeTab:AddParagraph({
+    Title = "🌐 Redes Sociais",
+    Content = "Discord: yanlioth\nGitHub: https://github.com/yanlioth"
+})
+
+HomeTab:AddButton({
+    Title = "Copiar Discord",
+    Description = "Copia seu user pro clipboard",
+    Callback = function()
+        setclipboard("yanlioth")
+        Fluent:Notify({
+            Title = "Copiado!",
+            Content = "User do Discord copiado com sucesso.",
+            Duration = 4
+        })
+    end
+})
+
+-- SCRIPTS UNIVERSAIS
+local ScriptTab = Window:AddTab({ Title = "Scripts", Icon = "code" })
+
+local universalScripts = {
+    ["🛠️ Infinite Yield"] = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source",
+    ["💎 Free Gamepass"] = "https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy",
+    ["🔍 Simple Spy V3"] = "https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua",
+    ["🛩️ R15 Animated Fly"] = "https://github.com/Sinister-Scripts/Roblox-Exploits/raw/refs/heads/main/FE-Animated-Mobile-Fly"
 }
 
--- Scripts Universais
-Tabs.Scripts:AddButton({
-    Title = "Infinite Yield",
-    Description = "Comandos de admin universais.",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    end
-})
+for name, url in pairs(universalScripts) do
+    ScriptTab:AddButton({
+        Title = name,
+        Description = "Executar script",
+        Callback = function()
+            loadstring(game:HttpGet(url))()
+        end
+    })
+end
 
-Tabs.Scripts:AddButton({
-    Title = "Simple Spy V3",
-    Description = "Espião de scripts no jogo.",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
-    end
-})
+-- GAMES
+local GamesTab = Window:AddTab({ Title = "Games", Icon = "gamepad-2" })
 
-Tabs.Scripts:AddButton({
-    Title = "Dex Explorer",
-    Description = "Explorador de propriedades do jogo.",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
-    end
-})
+local gameScripts = {
+    ["🚂 Dead Rails"] = "https://raw.githubusercontent.com/NebulaHubOfc/Public/refs/heads/main/Loader.lua",
+    ["😈 Evade (DarkRai)"] = "https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Evade"
+}
 
-Tabs.Scripts:AddButton({
-    Title = "Anti AFK",
-    Description = "Evita ser kickado por inatividade.",
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/3pwgzVtM"))()
-    end
-})
+for name, url in pairs(gameScripts) do
+    GamesTab:AddButton({
+        Title = name,
+        Description = "Executar script do jogo",
+        Callback = function()
+            loadstring(game:HttpGet(url))()
+        end
+    })
+end
 
-Tabs.Scripts:AddButton({
-    Title = "CMD-X",
-    Description = "Outro hub de comandos completo.",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source"))()
-    end
-})
+-- CONFIGS E TEMA
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
 
-Tabs.Scripts:AddButton({
-    Title = "FireTouch (Auto Touch)",
-    Description = "Toca tudo automaticamente.",
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/bxP8T69k"))()
-    end
-})
+SaveManager:LoadAutoloadConfig()
+InterfaceManager:BuildInterfaceSection(Window)
+SaveManager:BuildConfigSection(Window)
