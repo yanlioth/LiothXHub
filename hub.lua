@@ -1,70 +1,69 @@
-repeat task.wait() until game:IsLoaded()
-task.wait(2)
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
--- Carregar Rayfield
-local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
-
--- Criar Janela Principal
-local Window = Rayfield:CreateWindow({
-    Name = "Lioth X Hub 🖤",
-    LoadingTitle = "Carregando...",
-    LoadingSubtitle = "Invadindo servidores Roblox 😈",
-    ConfigurationSaving = {
-        Enabled = false,
-    },
-    KeySystem = true,
-    KeySettings = {
-        Title = "Lioth X Hub | Key System",
-        Subtitle = "Insira a key para acessar",
-        Note = "Key: liothhub2025",
-        SaveKey = false,
-        Key = {"liothhub2025"},
-    },
+local Window = Fluent:CreateWindow({
+    Title = "Lioth X Hub — by @yanlioth",
+    SubTitle = "Universal Roblox Scripts",
+    TabWidth = 120,
+    Size = UDim2.fromOffset(500, 350),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.K
 })
 
-task.wait(1)
-
--- 🏠 HOME: Avisos, redes sociais, etc
-local HomeTab = Window:CreateTab("Home", 4483362458)
-HomeTab:CreateLabel("Bem-vindo ao Lioth X Hub")
-HomeTab:CreateLabel("Desenvolvido por @yanlioth")
-HomeTab:CreateParagraph({
-    Title = "🌐 Redes Sociais",
-    Content = "Discord: yanlioth\nYouTube: em breve...\nTwitter: em breve..."
-})
-HomeTab:CreateParagraph({
-    Title = "📢 Avisos",
-    Content = "Scripts em constante atualização.\nUse com responsabilidade! 😎"
+-- Home Tab
+local Home = Window:AddTab({ Title = "Home", Icon = "home" })
+Home:AddParagraph({
+    Title = "Bem-vindo!",
+    Content = "Siga @yanlioth no TikTok\nMais novidades em breve!"
 })
 
--- 💻 MAIN: Scripts universais
-local MainTab = Window:CreateTab("Main", 4483345998)
-MainTab:CreateLabel("Scripts Universais")
+-- Scripts Tab
+local Scripts = Window:AddTab({ Title = "Scripts", Icon = "code" })
 
-MainTab:CreateSection("📜 Scripts Universais")
-
-MainTab:CreateButton({
-    Name = "Infinite Yield",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-    end,
-})
-
-MainTab:CreateButton({
-    Name = "Free Gamepass",
+Scripts:AddButton({
+    Title = "🌀 Free Gamepass",
+    Description = "Habilita gamepasses grátis em vários jogos",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy", true))()
-    end,
+    end
 })
 
--- 🎮 GAMES: Scripts de jogos específicos
-local GamesTab = Window:CreateTab("Games", 4483362458)
+Scripts:AddButton({
+    Title = "🕵️ Simple Spy V3",
+    Description = "Explora eventos e funções do jogo em tempo real",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+    end
+})
 
-GamesTab:CreateSection("🚂 Dead Rails")
+-- Games Tab
+local Games = Window:AddTab({ Title = "Games", Icon = "gamepad" })
 
-GamesTab:CreateButton({
-    Name = "Dead Rails Script",
+Games:AddButton({
+    Title = "🔫 Dead Rails",
+    Description = "Script exclusivo pro jogo Dead Rails",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/NebulaHubOfc/Public/refs/heads/main/Loader.lua"))()
-    end,
+    end
 })
+
+Games:AddButton({
+    Title = "🏃‍♂️ Evade (DarkRai)",
+    Description = "Script avançado para o jogo Evade (by DarkRai)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Evade"))()
+    end
+})
+
+-- Config & Save
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+SaveManager:IgnoreThemeSettings()
+SaveManager:SetIgnoreIndexes({ "Watermark", "Keybind" })
+InterfaceManager:SetFolder("LiothXHub")
+SaveManager:SetFolder("LiothXHub")
+SaveManager:BuildConfigSection(Home)
+InterfaceManager:BuildInterfaceSection(Home)
+SaveManager:LoadAutoloadConfig()
