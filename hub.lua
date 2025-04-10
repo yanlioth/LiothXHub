@@ -1,34 +1,70 @@
+-- Lioth X Hub - Versão Completa e Decorada
+-- Desenvolvido por: Kai (AI) | Criado por: @yanlioth
+
+-- Função de loading clean (simulação)
+local function LoadingScreen(duration)
+    local startTime = tick()
+    while tick() - startTime < duration do
+        print("Carregando Lioth X Hub...")  -- Pode ser removido, usado apenas para debug
+        task.wait(0.5)
+    end
+end
+
+-- Espera o jogo carregar e roda a tela de loading
+repeat task.wait() until game:IsLoaded()
+LoadingScreen(2)  -- 2 segundos de loading clean
+
+-- Carregar Fluent UI e módulos de configuração
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+-- Criação da janela principal do hub
 local Window = Fluent:CreateWindow({
     Title = "Lioth X Hub",
-    SubTitle = "by @yanlioth",
+    SubTitle = "Desenvolvido por: Kai (AI) | Criado por: @yanlioth",
     TabWidth = 160,
-    Size = UDim2.fromOffset(520, 400),
+    Size = UDim2.fromOffset(540, 420),
     Acrylic = true,
-    Theme = "Dark",
+    Theme = "Darker",  -- Tema dark clean; pode ser trocado futuramente
     MinimizeKey = Enum.KeyCode.RightControl
 })
 
--- HOME
+-- Função para detectar o jogo atual via PlaceId (exemplo simples)
+local function DetectGame()
+    local gameMap = {
+        [2753915549] = "Blox Fruits",
+        [155615604] = "Murder Mystery 2",
+        [3944701803] = "Adopt Me",
+        [155615604] = "Murder Mystery 2"
+        -- Adicione outros PlaceIds e nomes conforme necessário
+    }
+    return gameMap[game.PlaceId] or "Desconhecido"
+end
+
+local currentGame = DetectGame()
+
+-- Aba HOME
 local HomeTab = Window:AddTab({ Title = "Home", Icon = "home" })
 HomeTab:AddParagraph({
     Title = "📢 Aviso",
-    Content = "Esse hub está em desenvolvimento. Algumas funções podem ser instáveis.\nFique atento às atualizações!"
+    Content = "Este hub está em desenvolvimento – algumas funções podem ser instáveis. Fique atento às atualizações!"
 })
 HomeTab:AddParagraph({
     Title = "👑 Desenvolvedor",
-    Content = "Criado por: @yanlioth"
+    Content = "Desenvolvido por: Kai (AI)\nCriado por: @yanlioth"
 })
 HomeTab:AddParagraph({
     Title = "🌐 Redes Sociais",
-    Content = "Discord: yanlioth\nGitHub: github.com/yanlioth"
+    Content = "Discord: yanlioth\nGitHub: https://github.com/yanlioth"
+})
+HomeTab:AddParagraph({
+    Title = "🎮 Jogo Atual",
+    Content = "Detectado: " .. currentGame
 })
 HomeTab:AddButton({
     Title = "Copiar Discord",
-    Description = "Copia seu user pro clipboard",
+    Description = "Copia seu user pro clipboard.",
     Callback = function()
         setclipboard("yanlioth")
         Fluent:Notify({
@@ -39,8 +75,8 @@ HomeTab:AddButton({
     end
 })
 
--- SCRIPTS UNIVERSAIS
-local ScriptTab = Window:AddTab({ Title = "Scripts", Icon = "code" })
+-- Aba SCRIPTS (Universais)
+local ScriptsTab = Window:AddTab({ Title = "Scripts", Icon = "code" })
 
 local universalScripts = {
     ["🛠️ Infinite Yield"] = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source",
@@ -50,16 +86,16 @@ local universalScripts = {
 }
 
 for name, url in pairs(universalScripts) do
-    ScriptTab:AddButton({
+    ScriptsTab:AddButton({
         Title = name,
-        Description = "Executar script",
+        Description = "Executa o script",
         Callback = function()
             loadstring(game:HttpGet(url))()
         end
     })
 end
 
--- GAMES
+-- Aba GAMES (Scripts de jogos)
 local GamesTab = Window:AddTab({ Title = "Games", Icon = "gamepad-2" })
 
 local gameScripts = {
@@ -70,22 +106,29 @@ local gameScripts = {
 for name, url in pairs(gameScripts) do
     GamesTab:AddButton({
         Title = name,
-        Description = "Executar script do jogo",
+        Description = "Executa o script do jogo",
         Callback = function()
             loadstring(game:HttpGet(url))()
         end
     })
 end
 
--- CONFIG E TEMA (fixado no final mesmo)
-local ConfigTab = Window:AddTab({ Title = "Configs", Icon = "settings" })
+-- Aba FAVORITOS (inicialmente com mensagem padrão; a funcionalidade dinâmica pode ser expandida futuramente)
+local FavoritesTab = Window:AddTab({ Title = "Favoritos", Icon = "star" })
+FavoritesTab:AddParagraph({
+    Title = "Favoritos",
+    Content = "Nenhum favorito adicionado. Em breve, você poderá salvar seus scripts preferidos aqui!"
+})
 
+-- Aba CONFIGS (para salvar configurações e trocar temas)
+local ConfigsTab = Window:AddTab({ Title = "Configs", Icon = "settings" })
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
-
-InterfaceManager:SetFolder("LiothXHub")
 SaveManager:SetFolder("LiothXHub")
-SaveManager:BuildConfigSection(ConfigTab)
-InterfaceManager:BuildInterfaceSection(ConfigTab)
-
+InterfaceManager:SetFolder("LiothXHub")
+-- Constrói a seção de configurações e temas na aba Configs
+SaveManager:BuildConfigSection(ConfigsTab)
+InterfaceManager:BuildInterfaceSection(ConfigsTab)
 SaveManager:LoadAutoloadConfig()
+
+-- Fim do hub.
