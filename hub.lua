@@ -78,7 +78,7 @@ for name, url in pairs(gameScripts) do
 end
 
 -- CONFIG E TEMA (fixado no final mesmo)
-local ConfigTab = Window:AddTab({ Title = " Configs", Icon = "settings" })
+local ConfigTab = Window:AddTab({ Title = "Configs", Icon = "settings" })
 
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
