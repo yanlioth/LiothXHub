@@ -31,3 +31,10 @@ ScriptsTab:CreateButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
     end,
 })
+
+ScriptsTab:CreateButton({
+    Name = "Dead Rails",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NebulaHubOfc/Public/refs/heads/main/Loader.lua"))()
+    end,
+})
