@@ -1,69 +1,110 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+-- Lioth X Hub - by @yanlioth 😎
 
-local Window = Fluent:CreateWindow({
-    Title = "Lioth X Hub — by @yanlioth",
-    SubTitle = "Universal Roblox Scripts",
-    TabWidth = 120,
-    Size = UDim2.fromOffset(500, 350),
-    Acrylic = true,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.K
+-- Rayfield UI
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Tela de loading estilosa
+Rayfield:Notify({
+    Title = "Lioth X Hub",
+    Content = "Carregando o melhor hub do pedaço...",
+    Duration = 3,
+    Image = nil,
+    Actions = {},
 })
 
--- Home Tab
-local Home = Window:AddTab({ Title = "Home", Icon = "home" })
-Home:AddParagraph({
-    Title = "Bem-vindo!",
-    Content = "Siga @yanlioth no TikTok\nMais novidades em breve!"
+-- Janela principal
+local Window = Rayfield:CreateWindow({
+    Name = "Lioth X Hub | by @yanlioth",
+    LoadingTitle = "Lioth X Hub",
+    LoadingSubtitle = "Dominando o Roblox 😈",
+    ConfigurationSaving = {
+        Enabled = false,
+    },
+    Discord = {
+        Enabled = false,
+    },
+    KeySystem = false,
 })
 
--- Scripts Tab
-local Scripts = Window:AddTab({ Title = "Scripts", Icon = "code" })
+-- Aba HOME
+local Home = Window:CreateTab("🏠 Home", nil)
+Home:CreateParagraph({Title = "Aviso", Content = "Bem-vindo ao Lioth X Hub! Use com sabedoria 😎"})
+Home:CreateParagraph({Title = "Redes Sociais", Content = "Discord: @yanlioth\nYouTube: EM BREVE\nTikTok: EM BREVE"})
+
+-- Aba SCRIPTS (universais)
+local Scripts = Window:CreateTab("🧠 Scripts", nil)
 
 Scripts:AddButton({
-    Title = "🌀 Free Gamepass",
-    Description = "Habilita gamepasses grátis em vários jogos",
+    Title = "📦 Dex Explorer",
+    Description = "Interface avançada de exploração",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy", true))()
-    end
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/DexExplorer/main/source.lua"))()
+    end,
 })
 
 Scripts:AddButton({
-    Title = "🕵️ Simple Spy V3",
-    Description = "Explora eventos e funções do jogo em tempo real",
+    Title = "⚙️ Infinite Yield",
+    Description = "Comandos admin em vários jogos",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end,
+})
+
+Scripts:AddButton({
+    Title = "🔍 Simple Spy V3",
+    Description = "Sniffador de scripts em tempo real",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
-    end
+    end,
 })
 
--- Games Tab
-local Games = Window:AddTab({ Title = "Games", Icon = "gamepad" })
+Scripts:AddButton({
+    Title = "🆓 Free Gamepass",
+    Description = "Gamepasses grátis (em jogos compatíveis)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/BaconBossScript/Crazy/main/Crazy"))()
+    end,
+})
+
+-- Aba GAMES
+local Games = Window:CreateTab("🎮 Games", nil)
 
 Games:AddButton({
-    Title = "🔫 Dead Rails",
-    Description = "Script exclusivo pro jogo Dead Rails",
+    Title = "🚆 Dead Rails",
+    Description = "Script completo para Dead Rails",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/NebulaHubOfc/Public/refs/heads/main/Loader.lua"))()
-    end
+    end,
+})
+
+Games:AddButton({
+    Title = "🍉 Blox Fruits (Hoho Hub)",
+    Description = "Auto-farm e teleportes",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()
+    end,
+})
+
+Games:AddButton({
+    Title = "🐾 Pet Simulator X (Project WD)",
+    Description = "Script completo para PSX",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ProjectWD/script/main/main.lua"))()
+    end,
+})
+
+Games:AddButton({
+    Title = "🚪 DOORS (Vynixius)",
+    Description = "Auto win, ESP e mais",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Vynixu/Vynixius/main/Doors/Loader.lua"))()
+    end,
 })
 
 Games:AddButton({
     Title = "🏃‍♂️ Evade (DarkRai)",
-    Description = "Script avançado para o jogo Evade (by DarkRai)",
+    Description = "Script para Evade (Darkrai-X)",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/GamingScripter/Darkrai-X/main/Games/Evade"))()
-    end
+    end,
 })
-
--- Config & Save
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({ "Watermark", "Keybind" })
-InterfaceManager:SetFolder("LiothXHub")
-SaveManager:SetFolder("LiothXHub")
-SaveManager:BuildConfigSection(Home)
-InterfaceManager:BuildInterfaceSection(Home)
-SaveManager:LoadAutoloadConfig()
