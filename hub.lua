@@ -6,7 +6,7 @@ local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 -- Tela de loading estilosa
 Rayfield:Notify({
     Title = "Lioth X Hub",
-    Content = "Carregando o melhor hub do pedaço...",
+    Content = "Carregando o melhor hub do mundo...",
     Duration = 3,
     Image = nil,
     Actions = {},
