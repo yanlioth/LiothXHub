@@ -7,7 +7,7 @@ local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 -- Criar Janela Principal
 local Window = Rayfield:CreateWindow({
     Name = "Lioth X Hub 🖤",
-    LoadingTitle = "Carregando a Máfia...",
+    LoadingTitle = "Carregando...",
     LoadingSubtitle = "Invadindo servidores Roblox 😈",
     ConfigurationSaving = {
         Enabled = false,
