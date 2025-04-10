@@ -30,7 +30,7 @@ HomeTab:CreateLabel("Bem-vindo ao Lioth X Hub")
 HomeTab:CreateLabel("Desenvolvido por @yanlioth")
 HomeTab:CreateParagraph({
     Title = "🌐 Redes Sociais",
-    Content = "Discord: yanlioth\nYouTube: em breve...\nTwitter: @yanlioth"
+    Content = "Discord: yanlioth\nYouTube: em breve...\nTwitter: em breve..."
 })
 HomeTab:CreateParagraph({
     Title = "📢 Avisos",
